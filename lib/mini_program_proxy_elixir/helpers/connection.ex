@@ -58,7 +58,7 @@ defmodule MiniProgramProxyElixir.Helpers.Connection do
   end
 
   def get_base_url do
-    base_url = case Application.fetch_env(:mini_program_proxy_elixir, :proxy_url) do
+    base_url = case System.fetch_env("PROXY_HOST") do
       {:ok, base_path} ->
         base_path
       {:error, _} ->

@@ -49,7 +49,7 @@ defmodule MiniProgramProxyElixirWeb.ProxyController do
     request = case Connection.put(path, request_body, request_headers) do
       {:ok, resp} ->
         resp
-      {:error, err} ->
+      {:error, _err} ->
         nil
     end
 

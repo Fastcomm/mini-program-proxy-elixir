@@ -8,9 +8,10 @@ use Mix.Config
 # with webpack to recompile .js and .css sources.
 config :mini_program_proxy_elixir, MiniProgramProxyElixirWeb.Endpoint,
   debug_errors: true,
-  code_reloader: true,
+  code_reloader: false,
   check_origin: false,
-  watchers: []
+  watchers: [],
+  server: true
 
 # ## SSL Support
 #

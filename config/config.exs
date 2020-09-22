@@ -7,9 +7,6 @@
 # General application configuration
 use Mix.Config
 
-config :mini_program_proxy_elixir,
-  proxy_url: "https://services-api-stage.ttrumpet.com" #"${PROXY_PATH}"
-
 # Configures the endpoint
 config :mini_program_proxy_elixir, MiniProgramProxyElixirWeb.Endpoint,
   http: [port: 6000],
