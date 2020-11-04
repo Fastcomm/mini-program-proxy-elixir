@@ -20,7 +20,7 @@ defmodule MiniProgramProxyElixirWeb.ProxyController do
     conn = Map.put(conn, :resp_body, request.body)
     |> Map.put(:resp_headers, response_headers)
     |> Map.put(:status, request.status_code)
-    |> json(request.body)
+    |> json(parse_body(request.body))
   end
 
   def get(conn, params) do
@@ -39,7 +39,7 @@ defmodule MiniProgramProxyElixirWeb.ProxyController do
     conn = Map.put(conn, :resp_body, request.body)
     |> Map.put(:resp_headers, response_headers)
     |> Map.put(:status, request.status_code)
-    |> json(request.body)
+    |> json(parse_body(request.body))
   end
 
   def put(conn, params) do
@@ -58,7 +58,7 @@ defmodule MiniProgramProxyElixirWeb.ProxyController do
     conn = Map.put(conn, :resp_body, request.body)
     |> Map.put(:resp_headers, response_headers)
     |> Map.put(:status, request.status_code)
-    |> json(request.body)
+    |> json(parse_body(request.body))
   end
 
   def post(conn, params) do
@@ -77,7 +77,7 @@ defmodule MiniProgramProxyElixirWeb.ProxyController do
     conn = Map.put(conn, :resp_body, request.body)
     |> Map.put(:resp_headers, response_headers)
     |> Map.put(:status, request.status_code)
-    |> json(request.body)
+    |> json(parse_body(request.body))
   end
 
   def get_headers(conn) do
@@ -98,6 +98,15 @@ defmodule MiniProgramProxyElixirWeb.ProxyController do
   def get_response_headers(headers) do
     headers
     |> Enum.reject(fn {key, _value} -> key == "Status" || key == "X-Cascade" || key == "X-Runtime" || key == "Transfer-Encoding" end)
+  end
+
+  defp parse_body(body) do
+    case Jason.decode(body) do
+      {:ok, json} ->
+        json
+      {:error, _} ->
+        body
+    end
   end
 
 end
